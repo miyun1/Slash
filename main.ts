@@ -4,6 +4,7 @@ namespace SpriteKind {
     export const ThePlayer = SpriteKind.create()
     export const Slash = SpriteKind.create()
     export const Map = SpriteKind.create()
+    export const Bomb = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const catHealth = StatusBarKind.create()
@@ -1098,6 +1099,107 @@ sprites.onOverlap(SpriteKind.Peow, SpriteKind.Projectile, function (sprite, othe
         catLast = true
     }
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Bomb, function (sprite, otherSprite) {
+    sprites.destroy(otherSprite, effects.fire, 500)
+    music.play(music.createSoundEffect(WaveShape.Square, 300, 200, 235, 114, 75, SoundExpressionEffect.Vibrato, InterpolationCurve.Curve), music.PlaybackMode.InBackground)
+    RuyolHPBar.value += -10
+    sprite.setFlag(SpriteFlag.GhostThroughSprites, true)
+    animation.runImageAnimation(
+    sprite,
+    [img`
+        . . . . . . f f f f . . . . . . 
+        . . . . f f f 2 2 f f f . . . . 
+        . . . f f f 2 2 2 2 f f f . . . 
+        . . f f f e e e e e e f f f . . 
+        . . f f e 2 2 2 2 2 2 e e f . . 
+        . . f e 2 f f f f f f 2 e f . . 
+        . . f f f f e e e e f f f f . . 
+        . f f e f b f 4 4 f b f e f f . 
+        . f e e 4 1 d d d d 1 4 e e f . 
+        . . f e e d d d d d d e e f . . 
+        . . . f e e 4 4 4 4 e e f . . . 
+        . . e 4 f 2 2 2 2 2 2 f 4 e . . 
+        . . 4 d f 2 2 2 2 2 2 f d 4 . . 
+        . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
+        . . . . . f f f f f f . . . . . 
+        . . . . . f f . . f f . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 1 1 1 1 . . . . . . 
+        . . . . 1 1 1 1 1 1 1 1 . . . . 
+        . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+        . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+        . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+        . . . 1 1 1 1 1 1 1 1 1 1 1 . . 
+        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+        . . 1 1 1 1 1 1 1 1 1 1 1 . . . 
+        . . . . 1 1 1 1 1 1 1 1 . . . . 
+        . . . . 1 1 1 1 1 1 1 . . . . . 
+        . . . . 1 1 1 . . . . . . . . . 
+        `,img`
+        . . . . . . f f f f . . . . . . 
+        . . . . f f f 2 2 f f f . . . . 
+        . . . f f f 2 2 2 2 f f f . . . 
+        . . f f f e e e e e e f f f . . 
+        . . f f e 2 2 2 2 2 2 e e f . . 
+        . . f e 2 f f f f f f 2 e f . . 
+        . . f f f f e e e e f f f f . . 
+        . f f e f b f 4 4 f b f e f f . 
+        . f e e 4 1 d d d d 1 4 e e f . 
+        . . f e e d d d d d d e e f . . 
+        . . . f e e 4 4 4 4 e e f . . . 
+        . . e 4 f 2 2 2 2 2 2 f 4 e . . 
+        . . 4 d f 2 2 2 2 2 2 f d 4 . . 
+        . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
+        . . . . . f f f f f f . . . . . 
+        . . . . . f f . . f f . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 1 1 1 1 . . . . . . 
+        . . . . 1 1 1 1 1 1 1 1 . . . . 
+        . . . 1 1 1 1 1 1 1 1 1 1 . . . 
+        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+        . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+        . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+        . . 1 1 1 1 1 1 1 1 1 1 1 . . . 
+        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+        . . . 1 1 1 1 1 1 1 1 1 1 1 . . 
+        . . . . 1 1 1 1 1 1 1 1 . . . . 
+        . . . . . 1 1 1 1 1 1 1 . . . . 
+        . . . . . . . . . 1 1 1 . . . . 
+        `,img`
+        . . . . . . f f f f . . . . . . 
+        . . . . f f f 2 2 f f f . . . . 
+        . . . f f f 2 2 2 2 f f f . . . 
+        . . f f f e e e e e e f f f . . 
+        . . f f e 2 2 2 2 2 2 e e f . . 
+        . . f e 2 f f f f f f 2 e f . . 
+        . . f f f f e e e e f f f f . . 
+        . f f e f b f 4 4 f b f e f f . 
+        . f e e 4 1 d d d d 1 4 e e f . 
+        . . f e e d d d d d d e e f . . 
+        . . . f e e 4 4 4 4 e e f . . . 
+        . . e 4 f 2 2 2 2 2 2 f 4 e . . 
+        . . 4 d f 2 2 2 2 2 2 f d 4 . . 
+        . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
+        . . . . . f f f f f f . . . . . 
+        . . . . . f f . . f f . . . . . 
+        `],
+    100,
+    false
+    )
+    RuyolSB.value += 5
+    timer.after(1000, function () {
+        sprite.setFlag(SpriteFlag.GhostThroughSprites, false)
+    })
+})
 function CatMech () {
     if (CatBoss.isHittingTile(CollisionDirection.Bottom)) {
         if (!(catTransform)) {
@@ -1116,6 +1218,23 @@ function CatMech () {
                 characterAnimations.setCharacterState(CatBoss, characterAnimations.rule(Predicate.FacingLeft, Predicate.Moving))
                 CatBoss.setVelocity(catSpeed, randint(-120, -180))
             }
+            timer.throttle("action", 1800, function () {
+                catBomb = sprites.create(img`
+                    . . . . . . 4 . 
+                    . 1 f f f 1 4 4 
+                    . f f f 1 1 f . 
+                    . f f f 1 f f . 
+                    . f f f f f f . 
+                    . f f f f f f . 
+                    . f f f f f f . 
+                    . . f f f f . . 
+                    `, SpriteKind.Bomb)
+                catBomb.setScale(1.5, ScaleAnchor.Middle)
+                catBomb.setPosition(CatBoss.x, CatBoss.y)
+                timer.after(1000, function () {
+                    sprites.destroy(catBomb, effects.fire, 500)
+                })
+            })
         }
     }
 }
@@ -1874,6 +1993,7 @@ function PlayerAnim () {
 }
 let ultiProject: Sprite = null
 let TPlayer: Sprite = null
+let catBomb: Sprite = null
 let catLast = false
 let catTransform = false
 let catSB: StatusBarSprite = null
