@@ -1,5 +1,5 @@
 {
-    "name": "Slash",
+    "name": "Moonman Rider",
     "description": "",
     "dependencies": {
         "device": "*",
@@ -12,7 +12,8 @@
         "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
         "darts": "*",
         "carnival": "github:microsoft/arcade-carnival#v0.0.7",
-        "arcade-minimap": "github:microsoft/arcade-minimap#v0.6.1"
+        "arcade-minimap": "github:microsoft/arcade-minimap#v0.6.1",
+        "Sprite Grid": "github:microsoft/arcade-grid#v1.3.0"
     },
     "files": [
         "main.blocks",
